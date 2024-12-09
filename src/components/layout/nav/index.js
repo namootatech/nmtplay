@@ -49,10 +49,10 @@ const NavGroup = ({ group }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <li className='relative'>
+    <li className='relative transition-all ease-in-out duration-200'>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className='px-2 py-2.5 hover:text-gray-100 flex items-center justify-between w-full'
+        className='transition-all ease-in-out duration-200 px-2 py-2.5 hover:text-gray-100 flex items-center justify-between w-full'
       >
         {group.name}
         <span
@@ -64,12 +64,12 @@ const NavGroup = ({ group }) => {
         </span>
       </button>
       {isOpen && (
-        <ul className='pl-4 mt-2 space-y-2 lg:absolute lg:left-0 lg:mt-0 lg:pl-0 lg:w-48 lg:bg-gray-800 lg:rounded-md lg:shadow-lg'>
+        <ul className='pl-4 transition-all ease-in-out duration-200 mt-2 space-y-2 lg:absolute lg:left-0 lg:mt-0 lg:pl-0 lg:w-48 lg:bg-gray-800 lg:rounded-md lg:shadow-lg'>
           {group.items.map((item, idx) => (
-            <li key={idx}>
+            <li key={idx} className='transition-all ease-in-out duration-200'>
               <a
                 href={item.href}
-                className='block px-4 py-2 hover:bg-gray-700 hover:text-gray-100'
+                className='block px-4 py-2 transition-all ease-in-out duration-200 hover:bg-gray-700 hover:text-gray-100'
               >
                 {item.name}
               </a>
@@ -82,6 +82,8 @@ const NavGroup = ({ group }) => {
 };
 
 export const NavBar = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   return (
     <header className='absolute left-0 top-0 w-full flex items-center h-24 z-40 bg-gradient-to-r via-fuchsia-900 from-fuchsia-900 to-yellow-400 border-b-8 border-b-dashed border-b-gray-900 text-gray-100'>
       <nav className='relative mx-auto lg:max-w-7xl w-full px-5 sm:px-10 md:px-12 lg:px-5 flex gap-x-5 justify-between items-center'>
@@ -93,7 +95,9 @@ export const NavBar = () => {
 
         <div
           data-navbar
-          className='  relative top-full translate-y-10 opacity-0 invisible lg:visible lg:translate-y-0 lg:opacity-100 left-0 bg-white dark:bg-gray-950 lg:!bg-transparent  dark:border-gray-800 py-8 lg:py-0 px-5 sm:px-10 md:px-12 lg:px-0 lg:border-none lg:w-max lg:space-x-16 lg:top-0 lg:relative lg:flex duration-300 lg:transition-all ease-linear bg-gray-100'
+          className={`${
+            isMobileMenuOpen ? 'block' : 'hidden'
+          } lg:block absolute bg-gradient-to-b from-gray-900 to-fuchsia-800 top-full translate-y-10  z-10 w-full lg:visible lg:translate-y-0 lg:opacity-100 left-0 dark:bg-gray-950 lg:!bg-transparent dark:border-gray-800 py-8 lg:py-0 px-5 sm:px-10 md:px-12 lg:px-0 lg:border-none lg:w-max lg:space-x-16 lg:top-0 lg:relative lg:flex duration-300 lg:transition-all ease-linear top-0 -mt-6`}
         >
           <ul className='flex flex-col lg:flex-row gap-6 lg:items-center text-gray-200 dark:text-gray-300 lg:w-full lg:justify-center'>
             {navGroups.map((group, idx) => (
@@ -111,7 +115,7 @@ export const NavBar = () => {
           <div className='flex flex-col sm:flex-row sm:items-center gap-4 lg:min-w-max mt-10 lg:mt-0'>
             <Link
               href='/portal/auth'
-              className='flex items-center justify-center w-full sm:w-auto h-12 px-6 rounded-full bg-white  dark:bg-gray-900 text-gray-800 dark:text-gray-300 border-3 border-fuchsia-500 dark:border-gray-800'
+              className='flex items-center justify-center w-full sm:w-auto h-12 px-6 rounded-full bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-300 border-3 border-fuchsia-500 dark:border-gray-800'
             >
               Login
             </Link>
@@ -119,20 +123,23 @@ export const NavBar = () => {
         </div>
         <div className='flex items-center lg:hidden'>
           <button
-            data-toggle-navbar
-            data-is-open='false'
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label='Toggle navbar'
-            className='outline-none border-l border-l-fuchsia-100 dark:border-l-gray-800 pl-3 relative py-3 children:flex'
+            className='outline-none border-l-4 rounded-md border-fuchsia-100 pl-3 relative py-3 flex items-center justify-center flex-col'
           >
             <span
               id='line-1'
               aria-hidden='true'
-              className='h-0.5 w-6 rounded bg-gray-800 dark:bg-gray-200 transition duration-300'
+              className={`h-2 w-6 rounded bg-white dark:bg-gray-200 transition duration-300 ${
+                isMobileMenuOpen ? 'rotate-45 translate-y-2.5 w-8' : ''
+              }`}
             ></span>
             <span
               id='line-2'
               aria-hidden='true'
-              className='mt-2 h-0.5 w-6 rounded bg-gray-800 dark:bg-gray-200 transition duration-300'
+              className={`mt-2 h-2 w-6 rounded bg-white dark:bg-gray-200 transition duration-300 ${
+                isMobileMenuOpen ? '-rotate-45 -translate-y-1.5 w-8' : ''
+              }`}
             ></span>
           </button>
         </div>
