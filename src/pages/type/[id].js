@@ -18,8 +18,12 @@ import {
 import Link from 'next/link';
 import { Pagination, Table } from '@/components/page';
 import { FaDownload } from 'react-icons/fa6';
+import { useRouter } from 'next/router';
 
-const UmculoPage = () => {
+const FileTypePage = () => {
+  const router = useRouter();
+  const { id } = router.query;
+  console.log('router.query id', id);
   const [documents, setDocuments] = useState([]);
   const [lastDoc, setLastDoc] = useState(null);
   const [firstDoc, setFirstDoc] = useState(null);
@@ -29,19 +33,20 @@ const UmculoPage = () => {
   const docsPerPage = 10;
 
   useEffect(() => {
+    console.log('fetching documents', id);
     fetchDocuments();
-  }, []);
+  }, [id]);
 
   const fetchDocuments = async (direction = 'next') => {
     setLoading(true);
     setError(null);
-
+    console.log('sub category', id);
     try {
       let q;
       if (direction === 'next' && lastDoc) {
         q = query(
           collection(db, 'files'),
-          where('sub-category', '==', id),
+          where('subCategory', '==', id),
           orderBy('createdAt', 'desc'),
           startAfter(lastDoc),
           limit(docsPerPage)
@@ -49,7 +54,7 @@ const UmculoPage = () => {
       } else if (direction === 'prev' && firstDoc) {
         q = query(
           collection(db, 'files'),
-          where('sub-category', '==', id),
+          where('subCategory', '==', id),
           orderBy('createdAt', 'desc'),
           endBefore(firstDoc),
           limitToLast(docsPerPage)
@@ -57,7 +62,7 @@ const UmculoPage = () => {
       } else {
         q = query(
           collection(db, 'files'),
-          where('sub-category', '==', id),
+          where('subCategory', '==', id),
           orderBy('createdAt', 'desc'),
           limit(docsPerPage)
         );
@@ -192,7 +197,7 @@ const UmculoPage = () => {
         <Table
           headers={[
             'File Name',
-            'sub-Category',
+            'Category',
             'Uploader',
             'Downloads',
             'Actions',
@@ -213,7 +218,7 @@ const UmculoPage = () => {
                 </span>
               </p>
             ),
-            subCategory: doc.subCategory,
+            subCategory: doc.category,
             username: (
               <p className='text-transparent bg-clip-text bg-gradient-to-br from-fuchsia-600 to-yellow-400'>
                 @{doc.user.gama}
@@ -244,4 +249,4 @@ const UmculoPage = () => {
   );
 };
 
-export default UmculoPage;
+export default FileTypePage;
