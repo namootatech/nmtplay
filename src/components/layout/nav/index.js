@@ -6,41 +6,41 @@ const navGroups = [
   {
     name: 'Media',
     items: [
-      { name: 'Posts', href: '/media/posts' },
-      { name: 'Memes', href: '/media/memes' },
-      { name: 'Music', href: '/media/music' },
-      { name: 'Videos', href: '/media/videos' },
-      { name: 'Movies', href: '/media/movies' },
+      { name: 'Posts', href: '/posts' },
+      { name: 'Memes', href: '/memes' },
+      { name: 'Music', href: '/umculo' },
+      { name: 'Videos', href: '/videos' },
+      { name: 'Movies', href: '/type/movies' },
     ],
   },
   {
     name: 'Documents',
     items: [
-      { name: 'CV Templates', href: '/documents/cv-templates' },
-      { name: 'Contracts', href: '/documents/contracts' },
-      { name: 'Other Templates', href: '/documents/other-templates' },
-      { name: 'Books', href: '/documents/books' },
+      { name: 'CV Templates', href: '/type/cv-templates' },
+      { name: 'Contracts', href: '/type/contracts' },
+      { name: 'Books', href: '/iincwadi' },
       {
         name: 'Question Papers & Memos',
-        href: '/documents/question-papers-memos',
+        href: '/amaphepha',
       },
     ],
   },
   {
     name: 'Downloads',
     items: [
-      { name: 'Apps', href: '/downloads/apps' },
-      { name: 'PC Games', href: '/downloads/pc-games' },
-      { name: 'FRP Bypass', href: '/downloads/frp-bypass' },
-      { name: 'Wallpapers', href: '/downloads/wallpapers' },
+      { name: 'Apps', href: '/apps' },
+      { name: 'Computer Software', href: '/type/computer-softwares' },
+      { name: 'PC Games', href: '/type/windows-games' },
+      { name: 'FRP Bypass', href: '/type/frp-bypass-apps' },
+      { name: 'Wallpapers', href: '/type/wallpapers' },
     ],
   },
   {
     name: 'Other',
     items: [
-      { name: 'News', href: '/other/news' },
-      { name: 'Airtime & Data', href: '/other/airtime-data' },
-      { name: 'Competitions', href: '/other/competitions' },
+      { name: 'News', href: '/indaba' },
+      { name: 'Airtime & Data', href: '/airtime-data' },
+      { name: 'Competitions', href: '/competitions' },
     ],
   },
 ];
