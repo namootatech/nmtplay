@@ -112,7 +112,7 @@ export default function HomePage() {
             {/* imigutyulo section */}
             {imigutyulo.map((umgutyulo, indx) => (
               <div
-                className='w-1/3 p-4 overflow:hidden hover:scale-105 transform hover:py-0 transition-all ease-in-out duration:300'
+                className='w-full md:w-1/3 md:p-4 overflow:hidden hover:scale-105 transform hover:py-0 transition-all ease-in-out duration:300'
                 key={indx}
               >
                 <div

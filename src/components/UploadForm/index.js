@@ -17,6 +17,41 @@ const Categories = [
       { id: 'windows-apps', title: 'Windows', icon: 'windows' },
       { id: 'computer-software', title: 'Computer Software' },
       { id: 'frp-bypass-apps', title: 'Frp Bypass', icon: 'windows' },
+      { id: 'pdf-viewer', title: 'Pdf Viewer' },
+      { id: 'zip-extractor', title: 'Zip Extractor' },
+      { id: 'code-editor', title: 'Code Editor' },
+      { id: 'image-viewer', title: 'Image Viewer' },
+      { id: 'audio-player', title: 'Audio Player' },
+      { id: 'android-system-software', title: 'Android System Software' },
+      { id: 'android-system-software', title: 'Linux System Software' },
+      { id: 'windows-system-software', title: 'Windows System Software' },
+      { id: 'video-player', title: 'Video Player' },
+      { id: 'word-processor', title: 'Word Processor' },
+      { id: 'spreadsheet-editor', title: 'Spreadsheet Editor' },
+      { id: 'presentation-viewer', title: 'Presentation Viewer' },
+      { id: 'text-editor', title: 'Text Editor' },
+      { id: 'rtf-editor', title: 'Rtf Editor' },
+      { id: 'image-viewer', title: 'Image Viewer' },
+      { id: 'svg-viewer', title: 'Svg Viewer' },
+      { id: 'gif-viewer', title: 'Gif Viewer' },
+      { id: 'webp-viewer', title: 'Webp Viewer' },
+      { id: 'wav-player', title: 'Wav Player' },
+      { id: 'ogg-player', title: 'Ogg Player' },
+      { id: 'aac-player', title: 'Aac Player' },
+      { id: 'flac-player', title: 'Flac Player' },
+      { id: 'mkv-player', title: 'Mkv Player' },
+      { id: 'mov-player', title: 'Mov Player' },
+      { id: 'avi-player', title: 'Avi Player' },
+      { id: 'webm-player', title: 'Webm Player' },
+      { id: 'html-viewer', title: 'Html Viewer' },
+      { id: 'css-viewer', title: 'COode Editor' },
+      { id: 'json-viewer', title: 'Json Viewer' },
+      { id: 'xml-viewer', title: 'Xml Viewer' },
+      { id: 'python-editor', title: 'Python Editor' },
+      { id: 'code-editor', title: 'Code Editor' },
+      { id: 'photoshop-viewer', title: 'Photoshop Viewer' },
+      { id: 'font-viewer', title: 'Font Viewer' },
+      { id: 'font-viewer', title: 'Font Viewer' },
     ],
   },
   {
@@ -102,6 +137,7 @@ export default function UploadForm({ onClose }) {
   const auth = useAuth();
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState('');
+  const [image, setImage] = useState(null);
   const [category, setCategory] = useState('');
   const [description, setDescription] = useState('');
   const [subCategory, setSubCategory] = useState('');
@@ -110,6 +146,7 @@ export default function UploadForm({ onClose }) {
   const [tags, setTags] = useState([]);
   const [error, setError] = useState('');
   const fileInputRef = useRef(null);
+  const imageInputRef = useRef(null);
   const taginputref = useRef(null);
 
   useEffect(() => {
@@ -152,6 +189,26 @@ export default function UploadForm({ onClose }) {
     setSubCategory(''); // Reset subcategory when category changes
   };
 
+  const handleImageChange = (e) => {
+    setImage(e.target.files[0]);
+  };
+
+  const buildSizeString = (size) => {
+    const isLessThanOneKiloByte = size === 1 || size < 1024;
+    const isLessThanOneMegaByte = size >= 1 && size < 1024 * 1024;
+    const isLessThanOneGigaByte = size >= 1 && size < 1024 * 1024 * 1024;
+    const isLessThanOneTeraByte = size >= 1 && size < 1024 * 1024 * 1024 * 1024;
+    const sizeInKiloBytes = size / 1024;
+    const sizeInMegaBytes = sizeInKiloBytes / 1024;
+    const sizeInGigaBytes = sizeInMegaBytes / 1024;
+    const sizeInTeraBytes = sizeInGigaBytes / 1024;
+    if (isLessThanOneKiloByte) return `${size} bytes`;
+    if (isLessThanOneMegaByte) return `${sizeInKiloBytes.toFixed(2)} KB`;
+    if (isLessThanOneGigaByte) return `${sizeInMegaBytes.toFixed(2)} MB`;
+    if (isLessThanOneTeraByte) return `${sizeInGigaBytes.toFixed(2)} GB`;
+    return `${sizeInTeraBytes.toFixed(2)} TB`;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!file || !fileName || !category || !subCategory || !tags) {
@@ -165,6 +222,14 @@ export default function UploadForm({ onClose }) {
       await uploadBytes(storageRef, file);
       const downloadURL = await getDownloadURL(storageRef);
 
+      // Upload image to Firebase Storage (if provided)
+      let imageURL = null;
+      if (image) {
+        const imageStorageRef = ref(storage, `images/${image.name}`);
+        await uploadBytes(imageStorageRef, image);
+        imageURL = await getDownloadURL(imageStorageRef);
+      }
+
       // Add file details to Firestore
       await addDoc(collection(db, 'files'), {
         name: fileName,
@@ -175,9 +240,16 @@ export default function UploadForm({ onClose }) {
         tags,
         downloads: 0,
         url: downloadURL,
+        imageUrl: imageURL,
         userId: currentUser.uid,
         username: currentUser.gama || currentUser.displayname,
         createdAt: new Date(),
+        type: file.type,
+        sizeString: buildSizeString(file.size),
+        size: file.size,
+        extension: file.extension
+          ? file.extension.toLowerCase()
+          : file.name.split('.').pop(),
       });
 
       onClose();
@@ -186,7 +258,6 @@ export default function UploadForm({ onClose }) {
       setError('Error uploading file. Please try again.');
     }
   };
-
   return (
     <form
       onSubmit={handleSubmit}
@@ -202,11 +273,27 @@ export default function UploadForm({ onClose }) {
       <Button
         type='button'
         onClick={handleButtonClick}
-        className='bg-fuchsia-500 text-white mb-4 p-2'
+        className='bg-fuchsia-500 text-white mb-4 p-2 mr-4'
       >
         Choose File
       </Button>
       {file && <p className=' text-xs text-gray-100 mb-2'>{file.name}</p>}
+      <input
+        type='file'
+        accept='image/*'
+        onChange={handleImageChange}
+        ref={imageInputRef}
+        style={{ display: 'none' }}
+      />
+      <Button
+        type='button'
+        onClick={() => imageInputRef.current.click()}
+        className='bg-fuchsia-500 text-white mb-4 p-2 '
+      >
+        Choose Image
+      </Button>
+      {image && <p className='text-xs text-gray-100 mb-2'>{image.name}</p>}
+
       <Input
         type='text'
         placeholder='File Name'
