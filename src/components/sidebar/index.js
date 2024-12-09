@@ -83,9 +83,23 @@ export function Sidebar() {
       {isMobile && (
         <button
           onClick={toggleSidebar}
-          className='fixed top-4 left-4 z-50 p-2 bg-gray-800 text-white rounded-md'
+          aria-label='Toggle navbar'
+          className='outline-none border-l-4 rounded-md border-fuchsia-100 pl-3 relative py-3 flex items-center justify-center flex-col'
         >
-          <Menu size={24} />
+          <span
+            id='line-1'
+            aria-hidden='true'
+            className={`h-2 w-6 rounded bg-white dark:bg-gray-200 transition duration-300 ${
+              isOpen ? 'rotate-45 translate-y-2.5 w-8' : ''
+            }`}
+          ></span>
+          <span
+            id='line-2'
+            aria-hidden='true'
+            className={`mt-2 h-2 w-6 rounded bg-white dark:bg-gray-200 transition duration-300 ${
+              isOpen ? '-rotate-45 -translate-y-1.5 w-8' : ''
+            }`}
+          ></span>
         </button>
       )}
       <motion.div

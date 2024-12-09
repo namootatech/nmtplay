@@ -97,7 +97,7 @@ export const NavBar = () => {
           data-navbar
           className={`${
             isMobileMenuOpen ? 'block' : 'hidden'
-          } lg:block absolute bg-gradient-to-b transition-all ease-in-out duration-500 from-gray-900 to-fuchsia-800 top-full translate-y-10  z-10 w-full lg:visible lg:translate-y-0 lg:opacity-100 left-0 dark:bg-gray-950 lg:!bg-transparent dark:border-gray-800 py-8 lg:py-0 px-5 sm:px-10 md:px-12 lg:px-0 lg:border-none lg:w-max lg:space-x-16 lg:top-0 lg:relative lg:flex duration-300 lg:transition-all ease-linear top-0 -mt-6`}
+          } lg:block absolute bg-gradient-to-b md:bg-transparent md:to-transparent md:from-transparent transition-all ease-in-out duration-500 from-gray-900 to-fuchsia-800 top-full translate-y-10  z-10 w-full lg:visible lg:translate-y-0 lg:opacity-100 left-0 dark:bg-gray-950 lg:!bg-transparent dark:border-gray-800 py-8 lg:py-0 px-5 sm:px-10 md:px-12 lg:px-0 lg:border-none lg:w-max lg:space-x-16 lg:top-0 lg:relative lg:flex duration-300 lg:transition-all ease-linear top-0 -mt-6`}
         >
           <ul className='flex  transition-all ease-in-out duration-500 flex-col lg:flex-row gap-6 lg:items-center text-gray-200 dark:text-gray-300 lg:w-full lg:justify-center'>
             {navGroups.map((group, idx) => (
