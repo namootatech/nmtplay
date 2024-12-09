@@ -176,8 +176,86 @@ const Layout = ({
 
       <NavBar />
 
-      <main className='text-gray-700'>
+      <main className='text-gray-700 bg-gray-900'>
         <div>{children}</div>
+        <section class='py-24 bg-gray-900'>
+          <div class='max-w-7xl mx-auto px-5 sm:px-10 md:px-12 lg:px-5'>
+            <div class='w-full relative py-8 md:py-10 px-6 md:px-8 rounded-2xl bg-gradient-to-tr from-gray-100 to-gray-200 dark:from-gray-900'>
+              <div class='absolute right-0 top-0 h-full w-full flex justify-end'>
+                <div class='w-28 h-28 overflow-hidden flex rounded-xl relative blur-2xl'>
+                  <span class='absolute w-16 h-16 -top-1 -right-1 bg-fuchsia-500 rounded-md rotate-45'></span>
+                  <span class='absolute w-16 h-16 -bottom-1 -right-1 bg-teal-500 rounded-md rotate-45'></span>
+                  <span class='absolute w-16 h-16 -bottom-1 -left-1 bg-indigo-300 rounded-md rotate-45'></span>
+                </div>
+              </div>
+
+              <div class='absolute left-0 bottom-0 h-full w-full flex items-end'>
+                <div class='w-28 h-28 overflow-hidden flex rounded-xl relative blur-2xl'>
+                  <span class='absolute w-16 h-16 -top-1 -right-1 bg-fuchsia-500 rounded-md rotate-45'></span>
+                  <span class='absolute w-16 h-16 -bottom-1 -right-1 bg-teal-500 rounded-md rotate-45'></span>
+                  <span class='absolute w-16 h-16 -bottom-1 -left-1 bg-indigo-300 rounded-md rotate-45'></span>
+                </div>
+              </div>
+              <div class='mx-auto text-center max-w-xl md:max-w-2xl relative space-y-8'>
+                <h1 class='text-3xl/tight sm:text-4xl/tight md:text-5xl/tight font-bold text-fuchsia-950 dark:text-white'>
+                  Le website ngesNgesi sithi yi
+                  <span class='text-transparent bg-clip-text bg-gradient-to-br from-fuchsia-600 from-20% via-indigo-400 via-30% to-teal-600'>
+                    File Sharing website
+                  </span>{' '}
+                  for abantu base Eastern Cape
+                </h1>
+                <p class='text-gray-700 dark:text-gray-300'>
+                  Ayika gqitywa ntozakuthi kodwa Lena yi website eyenzelwe abo
+                  bathetha ulwimi lwesiXhosa ingakumbi abo base Eastern Cape
+                  province yakweli lase South Africa. Sizama ukwakha isizwe
+                  kwezobu chwephesha bantakwethu.Ngumqweno wethu ukuba nabanye
+                  bavele nezabo iinitiatives eziphuhlisa isizwe sabantsundu.
+                  Ngalawo sithi makwande apho nithatha khona kudede ubumyama
+                  kuvele ukukhanya, Canmagu ntozobawo.
+                </p>
+                <div class='mx-auto max-w-md sm:max-w-xl flex justify-center'>
+                  <button class='outline-none h-12 px-5 rounded-xl bg-fuchsia-600 text-white flex items-center'>
+                    Get In touch
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <footer class='bg-white rounded-lg shadow m-4 dark:bg-gray-800'>
+          <div class='w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between'>
+            <span class='text-sm text-gray-500 sm:text-center dark:text-gray-400'>
+              © 2023{' '}
+              <a href='https://flowbite.com/' class='hover:underline'>
+                NMTPlay™
+              </a>
+              . All Rights Reserved.
+            </span>
+            <ul class='flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0'>
+              <li>
+                <a href='#' class='hover:underline me-4 md:me-6'>
+                  Ngathi
+                </a>
+              </li>
+              <li>
+                <a href='#' class='hover:underline me-4 md:me-6'>
+                  iPrivacy Policy Yethu
+                </a>
+              </li>
+              <li>
+                <a href='#' class='hover:underline me-4 md:me-6'>
+                  iMigaqo Siseko Yethu
+                </a>
+              </li>
+              <li>
+                <a href='#' class='hover:underline'>
+                  Sifumaneka Njani
+                </a>
+              </li>
+            </ul>
+          </div>
+        </footer>
       </main>
     </>
   );
