@@ -49,14 +49,14 @@ const NavGroup = ({ group }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <li className='relative transition-all ease-in-out duration-200'>
+    <li className='relative transition-all ease-in-out duration-500'>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className='transition-all ease-in-out duration-200 px-2 py-2.5 hover:text-gray-100 flex items-center justify-between w-full'
+        className='transition-all ease-in-out duration-500 px-2 py-2.5 hover:text-gray-100 flex items-center justify-between w-full'
       >
         {group.name}
         <span
-          className={`ml-2 transition-transform duration-200 ${
+          className={`ml-2 transition-transform duration-500 ${
             isOpen ? 'rotate-180' : ''
           }`}
         >
@@ -64,12 +64,12 @@ const NavGroup = ({ group }) => {
         </span>
       </button>
       {isOpen && (
-        <ul className='pl-4 transition-all ease-in-out duration-200 mt-2 space-y-2 lg:absolute lg:left-0 lg:mt-0 lg:pl-0 lg:w-48 lg:bg-gray-800 lg:rounded-md lg:shadow-lg'>
+        <ul className='pl-4 transition-all ease-in-out duration-500 mt-2 space-y-2 lg:absolute lg:left-0 lg:mt-0 lg:pl-0 lg:w-48 lg:bg-gray-800 lg:rounded-md lg:shadow-lg'>
           {group.items.map((item, idx) => (
-            <li key={idx} className='transition-all ease-in-out duration-200'>
+            <li key={idx} className='transition-all ease-in-out duration-500'>
               <a
                 href={item.href}
-                className='block px-4 py-2 transition-all ease-in-out duration-200 hover:bg-gray-700 hover:text-gray-100'
+                className='block px-4 py-2 transition-all ease-in-out duration-500 hover:bg-gray-700 hover:text-gray-100'
               >
                 {item.name}
               </a>
@@ -85,8 +85,8 @@ export const NavBar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <header className='absolute left-0 top-0 w-full flex items-center h-24 z-40 bg-gradient-to-r via-fuchsia-900 from-fuchsia-900 to-yellow-400 border-b-8 border-b-dashed border-b-gray-900 text-gray-100'>
-      <nav className='relative mx-auto lg:max-w-7xl w-full px-5 sm:px-10 md:px-12 lg:px-5 flex gap-x-5 justify-between items-center'>
+    <header className='absolute transition-all ease-in-out duration-500 left-0 top-0 w-full flex items-center h-24 z-40 bg-gradient-to-r via-fuchsia-900 from-fuchsia-900 to-yellow-400 border-b-8 border-b-dashed border-b-gray-900 text-gray-100'>
+      <nav className=' transition-all ease-in-out duration-500 relative mx-auto lg:max-w-7xl w-full px-5 sm:px-10 md:px-12 lg:px-5 flex gap-x-5 justify-between items-center'>
         <div className='flex items-center min-w-max'>
           <Link href='/' className='font-semibold flex items-center gap-x-2'>
             <img src='/logo.png' alt='logo' className='w-40 h-16' />
@@ -97,9 +97,9 @@ export const NavBar = () => {
           data-navbar
           className={`${
             isMobileMenuOpen ? 'block' : 'hidden'
-          } lg:block absolute bg-gradient-to-b from-gray-900 to-fuchsia-800 top-full translate-y-10  z-10 w-full lg:visible lg:translate-y-0 lg:opacity-100 left-0 dark:bg-gray-950 lg:!bg-transparent dark:border-gray-800 py-8 lg:py-0 px-5 sm:px-10 md:px-12 lg:px-0 lg:border-none lg:w-max lg:space-x-16 lg:top-0 lg:relative lg:flex duration-300 lg:transition-all ease-linear top-0 -mt-6`}
+          } lg:block absolute bg-gradient-to-b transition-all ease-in-out duration-500 from-gray-900 to-fuchsia-800 top-full translate-y-10  z-10 w-full lg:visible lg:translate-y-0 lg:opacity-100 left-0 dark:bg-gray-950 lg:!bg-transparent dark:border-gray-800 py-8 lg:py-0 px-5 sm:px-10 md:px-12 lg:px-0 lg:border-none lg:w-max lg:space-x-16 lg:top-0 lg:relative lg:flex duration-300 lg:transition-all ease-linear top-0 -mt-6`}
         >
-          <ul className='flex flex-col lg:flex-row gap-6 lg:items-center text-gray-200 dark:text-gray-300 lg:w-full lg:justify-center'>
+          <ul className='flex  transition-all ease-in-out duration-500 flex-col lg:flex-row gap-6 lg:items-center text-gray-200 dark:text-gray-300 lg:w-full lg:justify-center'>
             {navGroups.map((group, idx) => (
               <NavGroup key={idx} group={group} />
             ))}
