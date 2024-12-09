@@ -18,7 +18,7 @@ npm run dev
 
 ### Imigaqo
 
-Asi promoti ubukrelemnqa ke bethuna apha qha not nje sincedisa umphakathi uba ubene ndlela yoku phana iifiles nee programs kanje ngokuba sikwazi ukuyenza lonto offline, apha siphana iifiles online
+Asi promoti ubukrelemnqa ke bethuna apha qha nje sincedisa umphakathi uba ubene ndlela yoku phana iifiles nee programs kanje ngokuba sikwazi ukuyenza lonto offline, apha siphana iifiles online
 iTerminology yethu esiyisebenziosa apha ku Gutyula, apha ekhaya ukuGutyula can mean almost any action but thina sithi uku gutyula means to Download, ibe ke sinabo naba gutyuli bethu abo ba downloada iifiles kweli le internet.
 
 Ndicela sizame icode yethu kunye nee coppies zethu zihambe ngesi Xhosa sa simanjemanje okanye i vernac singasisebenzisi kakhulu isislungu, only for ezo Ndawo sidingeka kuzo manyan nyan
