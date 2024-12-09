@@ -43,15 +43,13 @@ if (typeof window !== 'undefined') {
 }
 
 if (process.env.NODE_ENV === 'development' && typeof window !== 'undefined') {
+  console.log('Using emulators');
   firebaseAnalytics = getAnalytics(app);
   firebaseaAuth = getAuth(app);
   connectFirestoreEmulator(db, 'localhost', 3005);
   connectAuthEmulator(firebaseaAuth, 'http://localhost:9099');
   connectStorageEmulator(storage, 'localhost', 9199);
 }
-
-console.log('Firebase Auth is ', firebaseaAuth);
-console.log('Firebase Analytics is ', firebaseAnalytics);
 
 export const analytics = firebaseAnalytics;
 export const auth = firebaseaAuth;

@@ -16,7 +16,6 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        console.log('User logged in:', user);
         const dbUserRef = doc(db, 'users', user.uid);
         try {
           const snapshot = await getDoc(dbUserRef);
@@ -44,9 +43,7 @@ export const AuthProvider = ({ children }) => {
     await signOut(auth);
   };
 
-  console.log('saving curtrent user to context', currentUser);
   const value = { currentUser, logout, db, analytics, auth };
-  console.log('saving value to context', value);
   return (
     <AuthContext.Provider value={value}>
       {!loading && children}

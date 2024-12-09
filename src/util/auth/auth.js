@@ -12,7 +12,6 @@ const googleProvider = new GoogleAuthProvider();
 
 export const registerishaWithEmail = async (data) => {
   try {
-    console.log('data', data);
     const userCredential = await createUserWithEmailAndPassword(
       auth,
       data.nomyayi,
