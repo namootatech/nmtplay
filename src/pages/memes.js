@@ -16,7 +16,7 @@ import {
   limitToLast,
 } from 'firebase/firestore';
 import Link from 'next/link';
-import { Pagination, Table } from '@/components/page';
+import MobileDownloads, { Pagination, Table } from '@/components/page';
 import { FaDownload } from 'react-icons/fa6';
 
 const Apps = () => {
