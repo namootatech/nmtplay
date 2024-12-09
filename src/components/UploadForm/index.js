@@ -14,7 +14,9 @@ const Categories = [
     subs: [
       { id: 'android', title: 'Android', icon: 'android' },
       { id: 'ios', title: 'iOS', icon: 'apple' },
-      { id: 'windows', title: 'Windows', icon: 'windows' },
+      { id: 'windows-apps', title: 'Windows', icon: 'windows' },
+      { id: 'computer-software', title: 'Computer Software' },
+      { id: 'frp-bypass-apps', title: 'Frp Bypass', icon: 'windows' },
     ],
   },
   {
@@ -76,12 +78,10 @@ const Categories = [
     id: 'games',
     title: 'Games',
     subs: [
-      { id: 'android', title: 'Android' },
-      { id: 'ios', title: 'iOS' },
-      { id: 'windows', title: 'Windows' },
-      { id: 'web', title: 'Web' },
-      { id: 'mobile', title: 'Mobile' },
-      { id: 'pc', title: 'PC' },
+      { id: 'android-games', title: 'Android' },
+      { id: 'ios-games', title: 'iOS' },
+      { id: 'windows-games', title: 'Windows' },
+      { id: 'web-games', title: 'Web' },
     ],
   },
   {
