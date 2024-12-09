@@ -1,3 +1,5 @@
+![Logo](https://github.com/namootatech/nmtplay/blob/main/public/logo.png)
+
 ## Gutyu!
 
 Molweni bagutyuli abahle, lena yi repository ka NMT Play the free file sharing website yase Eastern Cape,
