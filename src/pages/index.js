@@ -20,8 +20,9 @@ const imigutyulo = [
     mfanekiso: <SiApplemusic />,
   },
   {
-    igama: 'iiApps ezi Crackiweyo',
-    ngawo: 'Gutyula oopremiums version bee apps zakho ozithandayo apha.',
+    igama: 'iiApps ezi tshisayo',
+    ngawo:
+      'Gutyula apha ii apps zakho ozithandayo ezivela kwabanye abagutyuli.',
     link: '/apps',
     mfanekiso: <BsGooglePlay />,
   },
@@ -46,7 +47,7 @@ const imigutyulo = [
   },
   {
     igama: 'Courses',
-    ngawo: 'Bukula, Funda okanye gutyula iicourses zezifundo ezininzi apha.',
+    ngawo: 'Buka, Funda okanye gutyula iicourses zezifundo ezininzi apha.',
     link: '/izifundo',
     mfanekiso: <GiTeacher />,
   },
