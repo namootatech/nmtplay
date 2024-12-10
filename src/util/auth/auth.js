@@ -25,7 +25,7 @@ export const registerishaWithEmail = async (data) => {
     await setDoc(doc(db, 'users', userId), {
       ...userDetails,
       nomyayi: user.email,
-      gama: user.displayName || userDetails.igama || 'Anonymous Mgutyuli',
+      gama: user.displayName || userDetails.gama || 'Anonymous Mgutyuli',
       profilePic: user.profilePic || userDetails.profilePic || null,
       cellNamba: user.phoneNumber || userDetails.cellNamba || null,
       role: user.role || 'mgutyuli',

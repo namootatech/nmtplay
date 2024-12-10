@@ -277,7 +277,7 @@ export default function LoginPage() {
                   iGama Lakho
                 </Label>
                 <Input
-                  id='nomyayi'
+                  id='igama'
                   type='text'
                   placeholder='e.g doctorX'
                   value={ncukaca.gama}

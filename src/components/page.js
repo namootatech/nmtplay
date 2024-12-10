@@ -320,7 +320,7 @@ export default function MobileDownloads({
                   🔥
                 </div>
               )}
-              <div className='relative w-full h-40'>
+              {/* <div className='relative w-full h-40'>
                 {item.imageUrl && (
                   <Image
                     src={item.imageUrl || placeholderUri}
@@ -332,7 +332,7 @@ export default function MobileDownloads({
                     className='rounded-t-lg'
                   />
                 )}
-              </div>
+              </div> */}
               <CardHeader className='pb-2 text-white'>
                 <CardTitle>{item.name}</CardTitle>
               </CardHeader>

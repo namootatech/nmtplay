@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { IoIosArrowDown } from 'react-icons/io';
 
 const navGroups = [
@@ -83,9 +83,36 @@ const NavGroup = ({ group }) => {
 
 export const NavBar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const headerRef = useRef(null);
+
+  const closeMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (headerRef.current && !headerRef.current.contains(event.target)) {
+        closeMenu();
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+    };
+  }, []);
 
   return (
-    <header className='absolute transition-all ease-in-out duration-500 left-0 top-0 w-full flex items-center h-24 z-40 bg-gradient-to-r via-fuchsia-900 from-fuchsia-900 to-yellow-400 border-b-8 border-b-dashed border-b-gray-900 text-gray-100'>
+    <header
+      ref={headerRef}
+      className='absolute transition-all ease-in-out duration-500 left-0 top-0 w-full flex items-center h-24 z-40 bg-gradient-to-r via-fuchsia-900 from-fuchsia-900 to-yellow-400 border-b-8 border-b-dashed border-b-gray-900 text-gray-100'
+    >
       <nav className=' transition-all ease-in-out duration-500 relative mx-auto lg:max-w-7xl w-full px-5 sm:px-10 md:px-12 lg:px-5 flex gap-x-5 justify-between items-center'>
         <div className='flex items-center min-w-max'>
           <Link href='/' className='font-semibold flex items-center gap-x-2'>
