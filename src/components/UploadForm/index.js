@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { db, useStorage } from '@/util/firebase';
 import { collection, addDoc } from 'firebase/firestore';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useAuth } from '@/util/auth/context';
@@ -133,7 +133,6 @@ const Categories = [
 
 export default function UploadForm({ onClose }) {
   const storage = useStorage();
-  const { user } = useAuth();
   const auth = useAuth();
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState('');
@@ -145,6 +144,9 @@ export default function UploadForm({ onClose }) {
   const [tagInput, setTagInput] = useState(null);
   const [tags, setTags] = useState([]);
   const [error, setError] = useState('');
+  const [fileProgress, setFileProgress] = useState(0);
+  const [imageProgress, setImageProgress] = useState(0);
+  const [successMessage, setSuccessMessage] = useState('');
   const fileInputRef = useRef(null);
   const imageInputRef = useRef(null);
   const taginputref = useRef(null);
@@ -209,6 +211,30 @@ export default function UploadForm({ onClose }) {
     return `${sizeInTeraBytes.toFixed(2)} TB`;
   };
 
+  const uploadFileWithProgress = (file, path, onProgress) => {
+    return new Promise((resolve, reject) => {
+      const storageRef = ref(storage, path);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      uploadTask.on(
+        'state_changed',
+        (snapshot) => {
+          const progress = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+          onProgress(progress);
+        },
+        (error) => {
+          reject(error);
+        },
+        async () => {
+          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+          resolve(downloadURL);
+        }
+      );
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!file || !fileName || !category || !subCategory || !tags) {
@@ -217,47 +243,63 @@ export default function UploadForm({ onClose }) {
     }
 
     try {
-      // Upload file to Firebase Storage
-      const storageRef = ref(storage, `files/${file.name}`);
-      await uploadBytes(storageRef, file);
-      const downloadURL = await getDownloadURL(storageRef);
+      setError('');
+      setSuccessMessage('');
+      setFileProgress(0);
+      setImageProgress(0);
 
-      // Upload image to Firebase Storage (if provided)
+      // Upload file
+      const fileURL = await uploadFileWithProgress(
+        file,
+        `files/${file.name}`,
+        setFileProgress
+      );
+
+      // Upload image (if provided)
       let imageURL = null;
       if (image) {
-        const imageStorageRef = ref(storage, `images/${image.name}`);
-        await uploadBytes(imageStorageRef, image);
-        imageURL = await getDownloadURL(imageStorageRef);
+        imageURL = await uploadFileWithProgress(
+          image,
+          `images/${image.name}`,
+          setImageProgress
+        );
       }
 
       // Add file details to Firestore
       await addDoc(collection(db, 'files'), {
         name: fileName,
+        nameLowercase: fileName.toLowerCase(),
         filename: file.name,
         description,
         category,
         subCategory,
         tags,
         downloads: 0,
-        url: downloadURL,
+        url: fileURL,
         imageUrl: imageURL,
         userId: currentUser.uid,
-        username: currentUser.gama || currentUser.displayname,
+        username: currentUser.displayName || currentUser.email,
+        usernameLowercase:
+          currentUser.displayName?.toLowerCase() || currentUser.email,
         createdAt: new Date(),
         type: file.type,
-        sizeString: buildSizeString(file.size),
         size: file.size,
+        sizeString: buildSizeString(file.size),
         extension: file.extension
           ? file.extension.toLowerCase()
           : file.name.split('.').pop(),
       });
 
-      onClose();
+      setSuccessMessage('File uploaded successfully!');
+      setTimeout(() => {
+        onClose();
+      }, 2000);
     } catch (error) {
       console.error('Error uploading file:', error);
       setError('Error uploading file. Please try again.');
     }
   };
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -278,6 +320,14 @@ export default function UploadForm({ onClose }) {
         Choose File
       </Button>
       {file && <p className=' text-xs text-gray-100 mb-2'>{file.name}</p>}
+      {fileProgress > 0 && (
+        <div className='w-full bg-gray-200 rounded-full h-2.5 mb-4'>
+          <div
+            className='bg-blue-500 h-2.5 rounded-full'
+            style={{ width: `${fileProgress}%` }}
+          ></div>
+        </div>
+      )}
       <input
         type='file'
         accept='image/*'
@@ -293,7 +343,14 @@ export default function UploadForm({ onClose }) {
         Choose Image
       </Button>
       {image && <p className='text-xs text-gray-100 mb-2'>{image.name}</p>}
-
+      {imageProgress > 0 && (
+        <div className='w-full bg-gray-200 rounded-full h-2.5 mb-4'>
+          <div
+            className='bg-green-500 h-2.5 rounded-full'
+            style={{ width: `${imageProgress}%` }}
+          ></div>
+        </div>
+      )}
       <Input
         type='text'
         placeholder='File Name'
@@ -361,6 +418,8 @@ export default function UploadForm({ onClose }) {
         />
       </div>
       {error && <p className='text-red-500'>{error}</p>}
+      {successMessage && <p className='text-green-500'>{successMessage}</p>}
+
       <Button type='submit' className='bg-yellow-600 mr-4'>
         Upload
       </Button>
