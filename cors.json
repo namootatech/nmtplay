@@ -1,0 +1,8 @@
+[
+  {
+    "origin": ["https://nmtplay.co.za"],
+    "method": ["GET"],
+    "responseHeader": ["Content-Type"],
+    "maxAgeSeconds": 3600
+  }
+]

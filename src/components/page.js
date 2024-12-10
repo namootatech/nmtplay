@@ -320,17 +320,19 @@ export default function MobileDownloads({
                   🔥
                 </div>
               )}
-              {/* <div className='relative w-full h-40'>
-                <Image
-                  src={item.imageUrl || placeholderUri}
-                  placeholder='blur'
-                  blurDataURL={item.imageUrl || placeholderUri}
-                  alt={item.name || 'No image available'}
-                  layout='fill'
-                  objectFit='cover'
-                  className='rounded-t-lg'
-                />
-              </div> */}
+              <div className='relative w-full h-40'>
+                {item.imageUrl && (
+                  <Image
+                    src={item.imageUrl || placeholderUri}
+                    placeholder='blur'
+                    blurDataURL={item.imageUrl || placeholderUri}
+                    alt={item.name || 'No image available'}
+                    layout='fill'
+                    objectFit='cover'
+                    className='rounded-t-lg'
+                  />
+                )}
+              </div>
               <CardHeader className='pb-2 text-white'>
                 <CardTitle>{item.name}</CardTitle>
               </CardHeader>
