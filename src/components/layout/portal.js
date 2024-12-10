@@ -11,7 +11,6 @@ import {
 } from 'lucide-react';
 
 import { Sidebar } from '@/components/sidebar';
-import { SidebarInset, SidebarTrigger } from '@/components/ui/sidebar';
 
 export const metadata = {
   title: 'Configurable Sidebar',
@@ -35,11 +34,9 @@ export default function PortalLayout({ children, pageTitle, pageDescription }) {
   return (
     <div className='portal flex h-screen overflow-hidden'>
       <Sidebar />
-      <SidebarInset className='flex flex-col flex-1'>
-        <main className='flex-1 overflow-y-auto p-6 bg-gray-800'>
-          {children}
-        </main>
-      </SidebarInset>
+      <main className='overflow-y-auto p-2 md:w-full pt-20 bg-gray-800'>
+        {children}
+      </main>
     </div>
   );
 }

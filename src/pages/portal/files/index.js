@@ -97,47 +97,61 @@ export default function Home() {
       {isUploadFormOpen && (
         <UploadForm onClose={() => setIsUploadFormOpen(false)} />
       )}
-      <div className='bg-white p-6 rounded-lg shadow-md text-gray-700'>
-        <h2 className='text-lg font-semibold mb-4'>Uploaded Files</h2>
-        <table className='w-full border-collapse'>
-          <thead>
-            <tr className='bg-gray-200'>
-              <th className='p-2 border'>File Name</th>
-              <th className='p-2 border'>Category</th>
-              <th className='p-2 border'>Sub Category</th>
-              <th className='p-2 border'>Tags</th>
-              <th className='p-2 border'>Downloads</th>
-              <th className='p-2 border'>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentItems.map((file) => (
-              <tr key={file.id} className='text-center'>
-                <td className='p-2 border'>{file.name}</td>
-                <td className='p-2 border'>{file.category}</td>
-                <td className='p-2 border'>{file.subCategory}</td>
-                <td className='p-2 border'>{file.tags.join(', ')}</td>
-                <td className='p-2 border'>{file.downloads}</td>
-                <td className='p-2 border'>
-                  <Button onClick={() => handleDelete(file.id)}>Delete</Button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <div className='mt-4 text-gray-700'>
-          <ReactPaginate
-            previousLabel={'Previous'}
-            nextLabel={'Next'}
-            pageCount={pageCount}
-            onPageChange={handlePageClick}
-            containerClassName='flex justify-center space-x-2 text-gray-700'
-            activeClassName='bg-blue-500 text-f px-4 py-2 rounded'
-            pageClassName='px-3 py-1 border rounded'
-            previousClassName='px-3 py-1 border rounded'
-            nextClassName='px-3 py-1 border rounded'
-          />
+      <h2 className='text-lg font-semibold mb-4 text-white'>Uploaded Files</h2>
+      <div className=' flex w-full items-center sm:justify-center'>
+        <div className='w-full flex flex-col gap-4 text-sm border-separate border-spacing-y-2'>
+          {currentItems.map((file) => (
+            <div key={file.id} className='flex flex-col'>
+              <p className='grid grid-cols-2'>
+                <span className='bg-gray-300 p-2 text-gray-700'>Name: </span>
+                <span className='p-2'>{file.name}</span>
+              </p>
+              <p className='grid grid-cols-2'>
+                <span className='bg-gray-300 p-2 text-gray-700'>
+                  Category:{' '}
+                </span>
+                <span className='p-2'>{file.category}</span>
+              </p>
+              <p className='grid grid-cols-2'>
+                <span className='bg-gray-300 p-2 text-gray-700'>
+                  Sub Category:
+                </span>
+                <span className='p-2'>{file.subCategory}</span>
+              </p>
+              <p className='grid grid-cols-2'>
+                <span className='bg-gray-300 p-2 text-gray-700'>Tags: </span>
+                <span className='p-2'>{file.tags.join(', ')}</span>
+              </p>
+              <p className='grid grid-cols-2'>
+                <span className='bg-gray-300 p-2 text-gray-700'>
+                  Downloads:
+                </span>
+                <span className='p-2'>{file.downloads}</span>
+              </p>
+              <p className='td-class'>
+                <Button
+                  className='bg-yellow-800'
+                  onClick={() => handleDelete(file.id)}
+                >
+                  Delete
+                </Button>
+              </p>
+            </div>
+          ))}
         </div>
+      </div>
+      <div className='mt-4 text-gray-700'>
+        <ReactPaginate
+          previousLabel={'Previous'}
+          nextLabel={'Next'}
+          pageCount={pageCount}
+          onPageChange={handlePageClick}
+          containerClassName='flex justify-center space-x-2 text-gray-700'
+          activeClassName='bg-blue-500 text-f px-4 py-2 rounded'
+          pageClassName='px-3 py-1 border rounded'
+          previousClassName='px-3 py-1 border rounded'
+          nextClassName='px-3 py-1 border rounded'
+        />
       </div>
     </div>
   );

@@ -21,6 +21,9 @@ import {
   Star,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { signOut } from 'firebase/auth';
+import { useRouter } from 'next/router';
+import { useAuth } from '@/util/auth/context';
 
 const mainNavItems = [
   { title: 'Home', href: '/portal', icon: Home },
@@ -52,12 +55,17 @@ const ArticleNavItems = [
 ];
 
 export function Sidebar() {
+  const auth = useAuth();
   const [isOpen, setIsOpen] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
   const pathname = usePathname();
 
+  const router = useRouter();
+
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    const mobile = window.innerWidth < 768;
+    const handleResize = () => setIsMobile(mobile);
+    setIsOpen(!mobile);
     handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
@@ -66,7 +74,10 @@ export function Sidebar() {
   const toggleSidebar = () => setIsOpen(!isOpen);
 
   const sidebarVariants = {
-    open: { width: isMobile ? '100%' : '240px', transition: { duration: 0.3 } },
+    open: {
+      width: isMobile ? '80vw' : '240px',
+      transition: { duration: 0.3 },
+    },
     closed: { width: isMobile ? '0' : '64px', transition: { duration: 0.3 } },
   };
 
@@ -78,13 +89,18 @@ export function Sidebar() {
     return HomeNavItems;
   };
 
+  const doLogout = () => {
+    signOut();
+    router.push('/');
+  };
+
   return (
-    <>
+    <div className='absolute md:relative'>
       {isMobile && (
         <button
           onClick={toggleSidebar}
           aria-label='Toggle navbar'
-          className='outline-none border-l-4 rounded-md border-fuchsia-100 pl-3 relative py-3 flex items-center justify-center flex-col'
+          className='fixed  z-10 bg-transparent top-0 left-0 w-20 h-20 focus:outline-none border-l-4 rounded-md border-fuchsia-100 pl-3 relative py-3 flex items-center justify-center flex-col'
         >
           <span
             id='line-1'
@@ -107,11 +123,11 @@ export function Sidebar() {
         animate={isOpen ? 'open' : 'closed'}
         variants={sidebarVariants}
         className={cn(
-          'w-1/6 h-full bg-gray-900 text-white overflow-hidden transition-all duration-300 ease-in-out',
+          ' absolute md:relative top-0 z-0 h-screen w-screen md:w-1/6 bg-gray-900 text-white overflow-hidden transition-all duration-300 ease-in-out',
           isMobile && !isOpen ? 'w-0' : ''
         )}
       >
-        <div className='flex flex-col h-full'>
+        <div className='flex flex-col h-full py-16 '>
           <div className='p-4'>
             <img
               src='/logo.png'
@@ -167,14 +183,26 @@ export function Sidebar() {
             </ul>
           </nav>
           <div className='p-4 border-t border-gray-700'>
-            {isOpen && <p className='text-sm mb-2'>John Doe</p>}
-            <button className='flex items-center justify-center w-full p-2 rounded-md bg-gray-800 hover:bg-gray-700 transition-colors'>
+            {isOpen && (
+              <>
+                <p className='text-sm mb-4 ml-2 text-fuchsia-500 font-bold'>
+                  @{auth?.currentUser?.gama}
+                </p>
+                <p className='text-sm mb-4 ml-2'>
+                  {auth?.currentUser?.nomyayi}
+                </p>
+              </>
+            )}
+            <button
+              onClick={doLogout}
+              className='flex items-center justify-center w-full p-2 rounded-md bg-gray-800 hover:bg-gray-700 transition-colors'
+            >
               <LogOut size={24} className={isOpen ? 'mr-2' : ''} />
               {isOpen && <span>Logout</span>}
             </button>
           </div>
         </div>
       </motion.div>
-    </>
+    </div>
   );
 }
