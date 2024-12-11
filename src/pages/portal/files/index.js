@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
 import {
   collection,
-  getDocs,
   query,
   where,
   onSnapshot,
+  doc,
+  getDoc,
+  getDocs,
+  updateDoc,
 } from 'firebase/firestore';
 import { db } from '@/util/firebase';
 import PortalLayout from '@/components/layout/portal';
@@ -25,26 +28,31 @@ export default function Home() {
   const auth = useAuth();
 
   useEffect(() => {
-    fetchFiles();
-  }, [searchTerm]);
-
-  useEffect(() => {
     const { currentUser } = auth;
     setCurrentUser(currentUser);
+    console.log('setting current user', currentUser);
   }, [auth]);
 
-  const fetchFiles = async () => {
+  useEffect(() => {
+    if (currentUser) {
+      fetchFiles();
+    }
+  }, [currentUser]);
+
+  const fetchFiles = async (search) => {
     try {
-      const q = searchTerm
-        ? query(
-            collection(db, 'files'),
-            where('name', '==', searchTerm),
-            where('userId', '==', currentUser.uid)
-          )
-        : query(
-            collection(db, 'files'),
-            where('userId', '==', currentUser.uid)
-          );
+      console.log('fetching files', currentUser);
+      const q =
+        search === true && searchTerm
+          ? query(
+              collection(db, 'files'),
+              where('nameLowercase', '>=', searchTerm),
+              where('userId', '==', currentUser.uid)
+            )
+          : query(
+              collection(db, 'files'),
+              where('userId', '==', currentUser.uid)
+            );
 
       const unsubscribe = onSnapshot(q, (querySnapshot) => {
         const filesData = querySnapshot.docs.map((doc) => ({
@@ -61,6 +69,10 @@ export default function Home() {
     }
   };
 
+  const search = () => {
+    fetchFiles(true);
+  };
+
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
   };
@@ -68,6 +80,16 @@ export default function Home() {
   const handleDelete = (fileId) => {
     // Implement file deletion logic here
     console.log('Delete file with ID:', fileId);
+  };
+
+  const requestDeletion = (fileId) => {
+    // Implement file deletion request logic here
+    console.log('Request deletion for file with ID:', fileId);
+    const fileRef = doc(db, 'files', fileId);
+    updateDoc(fileRef, {
+      isRequestedForDeletion: true,
+      deletionStatus: 'Pending',
+    });
   };
 
   const offset = currentPage * itemsPerPage;
@@ -89,6 +111,9 @@ export default function Home() {
           onChange={(e) => setSearchTerm(e.target.value)}
           className='bg-gray-200'
         />
+        <Button onClick={search} className='bg-gray-900 text-white mb-4 p-2'>
+          Search
+        </Button>
         <Button
           onClick={() => setIsUploadFormOpen(!isUploadFormOpen)}
           className='bg-gradient-to-r from-yellow-600 to-fuchsia-900 text-white mb-4 p-2'
@@ -131,10 +156,21 @@ export default function Home() {
                 </span>
                 <span className='p-2'>{file.downloads}</span>
               </p>
+
+              {/* deletion status */}
+              {file.deletionStatus && (
+                <p className='grid grid-cols-2 bg-red-300'>
+                  <span className='bg-gray-300 p-2 text-gray-700'>
+                    Deletion Status:
+                  </span>
+                  <span className='p-2'>{file.deletionStatus}</span>
+                </p>
+              )}
+
               <p className='td-class'>
                 <Button
                   className='bg-yellow-800'
-                  onClick={() => handleDelete(file.id)}
+                  onClick={() => requestDeletion(file.id)}
                 >
                   Delete
                 </Button>
