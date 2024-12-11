@@ -77,6 +77,11 @@ export default function Home() {
     setCurrentPage(selected);
   };
 
+  const clearSearch = () => {
+    setSearchTerm('');
+    fetchFiles();
+  };
+
   const handleDelete = (fileId) => {
     // Implement file deletion logic here
     console.log('Delete file with ID:', fileId);
@@ -113,6 +118,12 @@ export default function Home() {
         />
         <Button onClick={search} className='bg-gray-900 text-white mb-4 p-2'>
           Search
+        </Button>
+        <Button
+          onClick={clearSearch}
+          className='bg-gray-500 text-white mb-4 p-2'
+        >
+          Clear Search
         </Button>
         <Button
           onClick={() => setIsUploadFormOpen(!isUploadFormOpen)}

@@ -11,16 +11,26 @@ const Categories = [
   {
     id: 'apps',
     title: 'Apps',
+    types: [
+      { id: 'android', title: 'Android' },
+      { id: 'ios', title: 'iOS' },
+      { id: 'windows-apps', title: 'Windows' },
+      { id: 'mac', title: 'Mac Os' },
+      { id: 'ubuntu', title: 'Ubuntu' },
+      { id: 'linux', title: 'Linux' },
+    ],
     subs: [
-      { id: 'android', title: 'Android', icon: 'android' },
-      { id: 'ios', title: 'iOS', icon: 'apple' },
-      { id: 'windows-apps', title: 'Windows', icon: 'windows' },
-      { id: 'computer-software', title: 'Computer Software' },
+      { id: 'general-computer-software', title: 'General Computer Software' },
       { id: 'frp-bypass-apps', title: 'Frp Bypass', icon: 'windows' },
       { id: 'general-apps', title: 'General' },
       { id: 'pdf-viewer', title: 'Pdf Viewer' },
       { id: 'zip-extractor', title: 'Zip Extractor' },
       { id: 'code-editor', title: 'Code Editor' },
+      { id: 'file-sharer', title: 'File Sharer' },
+      { id: 'network', title: 'Network' },
+      { id: 'device-management', title: 'Device Management' },
+      { id: 'system-management', title: 'System Management' },
+      { id: 'antivirus', title: 'Anti-Virus & Protection' },
       { id: 'image-viewer', title: 'Image Viewer' },
       { id: 'image-editor', title: 'Image Editor' },
       { id: 'audio-player', title: 'Audio Player' },
@@ -59,6 +69,13 @@ const Categories = [
   {
     id: 'docs-and-forms',
     title: 'Documents & Forms',
+    types: [
+      { id: 'docs', title: 'Documents' },
+      { id: 'doc-template', title: 'Document Templates' },
+      { id: 'forms', title: 'Forms' },
+      { id: 'memos', title: 'Memos' },
+      { id: 'other', title: 'Other' },
+    ],
     subs: [
       { id: 'cv-templates', title: 'CV Templates' },
       { id: 'cover-letters', title: 'Cover Letters' },
@@ -83,21 +100,66 @@ const Categories = [
   {
     id: 'books',
     title: 'Free Books',
-    subs: [
+    types: [
       { id: 'novels', title: 'Novels' },
       { id: 'scholarly', title: 'Scholarly' },
       { id: 'general-books', title: 'General' },
       { id: 'xhosa', title: 'Xhosa' },
       { id: 'other-books', title: 'Other Books' },
     ],
+    subs: [
+      { id: 'science', title: 'Science' },
+      { id: 'business', title: 'Business' },
+      { id: 'history', title: 'History' },
+      { id: 'politics', title: 'Politics' },
+      { id: 'religion', title: 'Religion' },
+      { id: 'other-books', title: 'Other Books' },
+    ],
   },
-  { id: 'memes', title: 'Memes' },
-  { id: 'courses', title: 'Courses' },
+  {
+    id: 'memes',
+    title: 'Memes',
+    types: [
+      { id: 'image', title: 'Image' },
+      { id: 'gif', title: 'Gif' },
+      { id: 'video', title: 'Video' },
+      { id: 'other', title: 'Other' },
+    ],
+    subs: [
+      { id: 'funny', title: 'Funny' },
+      { id: 'sad', title: 'Sad' },
+      { id: 'dark', title: 'Dark' },
+      { id: 'heart-love', title: 'Heart love' },
+      { id: 'news', title: 'News' },
+      { id: 'general-memes', title: 'General Memes' },
+      { id: 'other-memes', title: 'Other Memes' },
+    ],
+  },
+  {
+    id: 'courses',
+    title: 'Courses',
+    types: [
+      { id: 'online', title: 'Online' },
+      { id: 'offline', title: 'Offline' },
+    ],
+    subs: [
+      { id: 'programming', title: 'Programming' },
+      { id: 'design', title: 'Design' },
+      { id: 'marketing', title: 'Marketing' },
+      { id: 'business', title: 'Business' },
+      { id: 'languages', title: 'Languages' },
+      { id: 'other-courses', title: 'Other Courses' },
+    ],
+  },
   {
     id: 'tutorials',
     title: 'Tutorials',
+    types: [
+      { id: 'video', title: 'Video' },
+      { id: 'text', title: 'Text' },
+    ],
     subs: [
-      { id: 'scienece', title: 'Science' },
+      { id: 'science', title: 'Science' },
       { id: 'politics', title: 'Politics' },
       { id: 'commerce', title: 'Commerce (Business)' },
       { id: 'technology', title: 'Technology' },
@@ -111,6 +173,10 @@ const Categories = [
   {
     id: 'mp3',
     title: "MP3's",
+    types: [
+      { id: 'music', title: 'Music' },
+      { id: 'podcasts', title: 'Podcasts' },
+    ],
     subs: [
       { id: 'music', title: 'Music' },
       { id: 'podcasts', title: 'Podcasts' },
@@ -119,6 +185,11 @@ const Categories = [
   {
     id: 'videos',
     title: 'Videos',
+    types: [
+      { id: 'movies', title: 'Movies' },
+      { id: 'tv-shows', title: 'TV Shows' },
+      { id: 'documentaries', title: 'Documentaries' },
+    ],
     subs: [
       { id: 'video', title: 'Video' },
       { id: 'movies', title: 'Movies' },
@@ -130,10 +201,14 @@ const Categories = [
       { id: 'politics', title: 'Politics & Government' },
     ],
   },
-  { id: 'courses', title: 'Courses' },
   {
     id: 'games',
     title: 'Games',
+    types: [
+      { id: 'pc', title: 'PC' },
+      { id: 'console', title: 'Console' },
+      { id: 'mobile', title: 'Mobile' },
+    ],
     subs: [
       { id: 'android-games', title: 'Android' },
       { id: 'ios-games', title: 'iOS' },
@@ -145,6 +220,10 @@ const Categories = [
   {
     id: 'exam-papers',
     title: 'Exam Papers & Memos',
+    types: [
+      { id: 'past-papers', title: 'Past Papers' },
+      { id: 'memos', title: 'Memos' },
+    ],
     subs: [
       { id: 'school', title: 'Secondary school' },
       { id: 'highschool', title: 'High School' },
@@ -155,6 +234,10 @@ const Categories = [
   },
 ];
 
+const addWebsiteNameBeforeName = (fileName) => {
+  return 'Nmtplay.co.za - ' + fileName;
+};
+
 export default function UploadForm({ onClose }) {
   const storage = useStorage();
   const auth = useAuth();
@@ -162,6 +245,7 @@ export default function UploadForm({ onClose }) {
   const [fileName, setFileName] = useState('');
   const [image, setImage] = useState(null);
   const [category, setCategory] = useState('');
+  const [type, setType] = useState('');
   const [description, setDescription] = useState('');
   const [subCategory, setSubCategory] = useState('');
   const [currentUser, setCurrentUser] = useState(null);
@@ -293,7 +377,8 @@ export default function UploadForm({ onClose }) {
       await addDoc(collection(db, 'files'), {
         name: fileName,
         nameLowercase: fileName.toLowerCase(),
-        filename: file.name,
+        filename: addWebsiteNameBeforeName(file.name),
+        filenameLowerCase: addWebsiteNameBeforeName(file.name).toLowerCase(),
         description,
         category,
         subCategory,
@@ -390,6 +475,7 @@ export default function UploadForm({ onClose }) {
         className='mb-4 p-2 text-gray-600 border rounded flex-grow border-none focus:ring-0 w-full'
         rows={4}
       />
+
       <select
         value={category}
         onChange={handleCategoryChange}
@@ -403,21 +489,38 @@ export default function UploadForm({ onClose }) {
           </option>
         ))}
       </select>
-      {category && Categories.find((cat) => cat.id === category)?.subs && (
+      {category && Categories.find((cat) => cat.id === category)?.types && (
         <select
-          value={subCategory}
-          onChange={(e) => setSubCategory(e.target.value)}
+          value={type}
+          onChange={(e) => setType(e.target.value)}
           required
           className='ml-4 mb-4 p-2 border rounded text-gray-600'
         >
-          <option value=''>Select Sub Category</option>
-          {Categories.find((cat) => cat.id === category).subs.map((sub) => (
-            <option key={sub.id} value={sub.id}>
-              {sub.title}
+          <option value=''>Select Type</option>
+          {Categories.find((cat) => cat.id === category).types.map((type) => (
+            <option key={type.id} value={type.id}>
+              {type.title}
             </option>
           ))}
         </select>
       )}
+      {type &&
+        category &&
+        Categories.find((cat) => cat.id === category)?.subs && (
+          <select
+            value={subCategory}
+            onChange={(e) => setSubCategory(e.target.value)}
+            required
+            className='ml-4 mb-4 p-2 border rounded text-gray-600'
+          >
+            <option value=''>Select Sub Category</option>
+            {Categories.find((cat) => cat.id === category).subs.map((sub) => (
+              <option key={sub.id} value={sub.id}>
+                {sub.title}
+              </option>
+            ))}
+          </select>
+        )}
       <div className='flex flex-wrap items-center gap-2 p-2 border rounded mb-4'>
         {tags.map((tag) => (
           <Badge key={tag} variant='secondary' className='px-2 py-1'>
@@ -443,7 +546,6 @@ export default function UploadForm({ onClose }) {
       </div>
       {error && <p className='text-red-500'>{error}</p>}
       {successMessage && <p className='text-green-500'>{successMessage}</p>}
-
       <Button type='submit' className='bg-yellow-600 mr-4'>
         Upload
       </Button>
