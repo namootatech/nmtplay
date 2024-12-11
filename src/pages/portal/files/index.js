@@ -41,7 +41,10 @@ export default function Home() {
             where('name', '==', searchTerm),
             where('userId', '==', currentUser.uid)
           )
-        : query(collection(db, 'files'));
+        : query(
+            collection(db, 'files'),
+            where('userId', '==', currentUser.uid)
+          );
 
       const unsubscribe = onSnapshot(q, (querySnapshot) => {
         const filesData = querySnapshot.docs.map((doc) => ({
