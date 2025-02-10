@@ -211,7 +211,7 @@ const FileTypePage = () => {
   };
 
   return (
-    <section class='mt-24 min-h-screen py-8 transition-all ease-in-out min-h-max bg-gray-800 dark:bg-gray-950 flex justify-center'>
+    <section class='mt-40 min-h-screen py-8 transition-all ease-in-out min-h-max bg-gray-800 dark:bg-gray-950 flex justify-center'>
       <div className='container max-w-4xl text-white p-8'>
         <h1 className='text-gray-300 z-10 text-transparent bg-clip-text bg-gradient-to-br from-fuchsia-600 to-yellow-400  relative dark:text-white mx-auto max-w-5xl font-bold text-4xl/tight sm:text-5xl/tight lg:text-6xl/tight xl:text-7xl/tight'>
           ii<span clasName='capitalize'>{id}</span>
