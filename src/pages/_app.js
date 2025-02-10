@@ -3,6 +3,7 @@ import { Poppins } from 'next/font/google';
 import { AuthProvider } from '@/util/auth/context';
 import PortalLayout from '@/components/layout/portal';
 import Layout from '@/components/layout';
+import Banner from '@/components/Banner';
 export default function App({ Component, pageProps }) {
   const isPortalAuthRoute =
     typeof window !== 'undefined' &&
@@ -15,6 +16,7 @@ export default function App({ Component, pageProps }) {
   return (
     <AuthProvider>
       <PageLayout>
+        <Banner />
         <Component {...pageProps} />
       </PageLayout>
     </AuthProvider>
