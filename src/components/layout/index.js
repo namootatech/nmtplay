@@ -36,13 +36,10 @@ const Layout = ({
           property='og:description'
           content='Tyhini molo nantsika!, nantsi iwebsite  yoku downloada izinto ozidingayo for your phone, laptop or computer. Sinazo iiDocuments nee Form , Exam paqpers nee Memo, iiApps, iiGames, Umculo kanti even nee movies, vela apha ubone nawe!'
         />
-        <meta
-          property='og:image'
-          content='https://www.dollup.touch.net.za/og.png'
-        />
+        <meta property='og:image' content='https://www.nmtplay.co.za/og.png' />
         <meta property='og:url' content='https://www.nmtplay.co.za' />
         <meta property='og:type' content='website' />
-        <meta property='og:site_name' content='Dollup' />
+        <meta property='og:site_name' content='NMTPlay' />
 
         <meta name='twitter:card' content='summary_large_image' />
         <meta name='twitter:title' content='NMT Play - Umgutyulo wee files' />
@@ -99,7 +96,7 @@ const Layout = ({
           color='#5bbad5'
         />
         <meta name='apple-mobile-web-app-capable' content='yes' />
-        <meta name='apple-mobile-web-app-title' content='Dollup' />
+        <meta name='apple-mobile-web-app-title' content='NMTPlay' />
         <meta name='apple-mobile-web-app-status-bar-style' content='yellow' />
 
         <meta name='robots' content='index, follow' />
@@ -147,7 +144,7 @@ const Layout = ({
         <meta property='og:image' content={ogImage} />
         <meta
           property='og:url'
-          content={process.env.NEXT_PUBLIC_BASE_URL || 'https://nmtplay.com'}
+          content={process.env.NEXT_PUBLIC_BASE_URL || 'https://nmtplay.co.za'}
         />
 
         {/* Twitter */}

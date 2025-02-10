@@ -15,11 +15,20 @@ export default function App({ Component, pageProps }) {
   const PageLayout = isPortalRoute ? PortalLayout : Layout;
   return (
     <AuthProvider>
-      <Banner />
+      <div className='flex justify-center items-center'>
+        <Banner />
+        <Banner />
+        <Banner />
+      </div>
       <PageLayout>
         <div id='container-7c7c165b289bb869221a54a4b010a34c'></div>
         <Component {...pageProps} />
       </PageLayout>
+      <div className='flex justify-center items-center'>
+        <Banner />
+        <Banner />
+        <Banner />
+      </div>
     </AuthProvider>
   );
 }
