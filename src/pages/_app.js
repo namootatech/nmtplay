@@ -15,10 +15,10 @@ export default function App({ Component, pageProps }) {
   const PageLayout = isPortalRoute ? PortalLayout : Layout;
   return (
     <AuthProvider>
+      <Banner />
       <PageLayout>
-        <Banner />
+        <div id='container-7c7c165b289bb869221a54a4b010a34c'></div>
         <Component {...pageProps} />
-        <Banner />
       </PageLayout>
     </AuthProvider>
   );
