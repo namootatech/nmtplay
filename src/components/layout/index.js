@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { NavBar } from './nav';
 import { Ban } from 'lucide-react';
 import Banner from '../Banner';
+import { ResponsiveAdUnit } from 'nextjs-google-adsense';
 
 const Layout = ({
   title = 'NMTPlay - Download Free Files',
@@ -174,6 +175,12 @@ const Layout = ({
       </Head>
 
       <NavBar />
+
+      <ResponsiveAdUnit
+        publisherId='pub-8294995671791919'
+        slotId='4300519302'
+        type='before-home-hero'
+      />
 
       <main className='text-gray-700 bg-gray-900'>
         <div>{children}</div>
