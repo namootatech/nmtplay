@@ -99,7 +99,7 @@ const FilePage = () => {
   };
 
   return (
-    <div className='min-h-screen bg-gray-100 p-4'>
+    <div className='min-h-screen bg-gray-100 p-4 mt-40'>
       <Head>
         <title>Download {file.name}</title>
         <meta
