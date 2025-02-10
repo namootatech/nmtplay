@@ -18,6 +18,7 @@ export default function App({ Component, pageProps }) {
       <PageLayout>
         <Banner />
         <Component {...pageProps} />
+        <Banner />
       </PageLayout>
     </AuthProvider>
   );
