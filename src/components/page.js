@@ -283,6 +283,18 @@ export default function MobileDownloads({
     );
   }
 
+  function copyLink(id) {
+    const link = `https://nmtplay.co.za/file/${id}`;
+    navigator.clipboard
+      .writeText(link)
+      .then(() => {
+        alert('Link copied to clipboard!');
+      })
+      .catch((err) => {
+        console.error('Failed to copy: ', err);
+      });
+  }
+
   if (items.length === 0) {
     return (
       <div className='container mx-auto px-4 py-8 flex flex-col justify-center items-center min-h-4xl'>
@@ -453,6 +465,14 @@ export default function MobileDownloads({
                   >
                     <ThumbsUp size={16} />
                   </Button>
+                </div>
+                <div className='flex gap-2 w-full'>
+                  <button
+                    className='bg-yellow-700 text-white p-2 text-base w-full rounded-md text-center flex gap-2 mt-2'
+                    onClick={() => copyLink(item.id)}
+                  >
+                    Copy Link & Share!
+                  </button>
                 </div>
               </CardFooter>
             </Card>

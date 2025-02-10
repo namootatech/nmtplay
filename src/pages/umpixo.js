@@ -250,12 +250,36 @@ const UmculoPage = () => {
               ),
               downloads: doc.downloads,
               actions: (
-                <button
-                  className='bg-fuchsia-700 text-white p-1 text-xs rounded-md text-center flex gap-2'
-                  onClick={() => handleDownload(doc.id, doc.url, doc.filename)}
-                >
-                  Gutyu! <FaDownload />
-                </button>
+                <div key={doc.id}>
+                  <a
+                    href={doc.url}
+                    download={doc.filename}
+                    rel='noreferrer'
+                    target='_blank'
+                    className='bg-fuchsia-700 text-white p-1 text-xs rounded-md text-center flex gap-2'
+                    onClick={() =>
+                      handleDownload(doc.id, doc.url, doc.filename)
+                    }
+                  >
+                    Gutyu!
+                  </a>
+
+                  {/* Show progress bar if download is in progress */}
+                  {downloadProgress[doc.id] !== undefined &&
+                    downloadProgress[doc.id] < 100 && (
+                      <progress
+                        value={downloadProgress[doc.id]}
+                        max='100'
+                        className='w-full mt-2'
+                      />
+                    )}
+                  <button
+                    className='bg-yellow-700 text-white p-1 text-xs rounded-md text-center flex gap-2 mt-2'
+                    onClick={() => copyLink(doc.id, doc.url, doc.filename)}
+                  >
+                    Copy Link & Share!
+                  </button>
+                </div>
               ),
             }))}
             loading={loading}

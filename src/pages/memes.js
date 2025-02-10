@@ -98,23 +98,30 @@ const Apps = () => {
     fetchDocuments('prev');
   };
 
+  const [downloadProgress, setDownloadProgress] = useState({});
+
+  function copyLink(id, url, filename) {
+    const link = `https://nmtplay.co.za/file/${id}`;
+    navigator.clipboard
+      .writeText(link)
+      .then(() => {
+        alert('Link copied to clipboard!');
+      })
+      .catch((err) => {
+        console.error('Failed to copy: ', err);
+      });
+  } // Store progress per file
+
   const handleDownload = async (docId, url, fileName) => {
     try {
-      // Create a progress element
-      const progressElement = document.createElement('progress');
-      progressElement.max = 100;
-      progressElement.value = 0;
-      document.body.appendChild(progressElement);
+      setDownloadProgress((prev) => ({ ...prev, [docId]: 0 })); // Initialize progress
 
-      // Fetch the file
       const response = await fetch(url);
       if (!response.ok) throw new Error('Network response was not ok');
 
-      // Get the total size of the file
       const totalSize = parseInt(response.headers.get('Content-Length'), 10);
       let downloadedSize = 0;
 
-      // Create a ReadableStream from the response body
       const reader = response.body.getReader();
       const stream = new ReadableStream({
         start(controller) {
@@ -122,10 +129,12 @@ const Apps = () => {
             reader.read().then(({ done, value }) => {
               if (done) {
                 controller.close();
+                setDownloadProgress((prev) => ({ ...prev, [docId]: 100 })); // Mark as complete
                 return;
               }
               downloadedSize += value.length;
-              progressElement.value = (downloadedSize / totalSize) * 100;
+              const progress = Math.round((downloadedSize / totalSize) * 100);
+              setDownloadProgress((prev) => ({ ...prev, [docId]: progress })); // Update progress state
               controller.enqueue(value);
               push();
             });
@@ -134,35 +143,22 @@ const Apps = () => {
         },
       });
 
-      // Create a response from the stream
       const newResponse = new Response(stream);
-
-      // Get the blob from the new response
       const blob = await newResponse.blob();
-
-      // Create a temporary URL for the blob
       const downloadUrl = window.URL.createObjectURL(blob);
 
-      // Create a temporary anchor element
       const link = document.createElement('a');
       link.href = downloadUrl;
       link.download = fileName || 'download';
-
-      // Trigger the download
       link.click();
 
-      // Clean up
-      link.remove();
-      progressElement.remove();
       window.URL.revokeObjectURL(downloadUrl);
+      setDownloadProgress((prev) => ({ ...prev, [docId]: 100 })); // Ensure complete
 
-      // Update the downloads count in Firestore
+      // Update download count in Firestore
       const docRef = doc(db, 'files', docId);
-      await updateDoc(docRef, {
-        downloads: increment(1),
-      });
+      await updateDoc(docRef, { downloads: increment(1) });
 
-      // Update the local state to reflect the change
       setDocuments((prevDocs) =>
         prevDocs.map((doc) =>
           doc.id === docId
@@ -171,7 +167,7 @@ const Apps = () => {
         )
       );
     } catch (error) {
-      console.error('Error downloading file or updating count:', error);
+      console.error('Error downloading file:', error);
       alert('Error downloading file. Please try again.');
     }
   };
@@ -258,12 +254,36 @@ const Apps = () => {
               ),
               downloads: doc.downloads,
               actions: (
-                <button
-                  className='bg-fuchsia-700 text-white p-1 text-xs rounded-md text-center flex gap-2'
-                  onClick={() => handleDownload(doc.id, doc.url, doc.filename)}
-                >
-                  Gutyu! <FaDownload />
-                </button>
+                <div key={doc.id}>
+                  <a
+                    href={doc.url}
+                    download={doc.filename}
+                    rel='noreferrer'
+                    target='_blank'
+                    className='bg-fuchsia-700 text-white p-1 text-xs rounded-md text-center flex gap-2'
+                    onClick={() =>
+                      handleDownload(doc.id, doc.url, doc.filename)
+                    }
+                  >
+                    Gutyu!
+                  </a>
+
+                  {/* Show progress bar if download is in progress */}
+                  {downloadProgress[doc.id] !== undefined &&
+                    downloadProgress[doc.id] < 100 && (
+                      <progress
+                        value={downloadProgress[doc.id]}
+                        max='100'
+                        className='w-full mt-2'
+                      />
+                    )}
+                  <button
+                    className='bg-yellow-700 text-white p-1 text-xs rounded-md text-center flex gap-2 mt-2'
+                    onClick={() => copyLink(doc.id, doc.url, doc.filename)}
+                  >
+                    Copy Link & Share!
+                  </button>
+                </div>
               ),
             }))}
             loading={loading}

@@ -255,12 +255,26 @@ const FileTypePage = () => {
               ),
               downloads: doc.downloads,
               actions: (
-                <button
-                  className='bg-fuchsia-700 text-white p-1 text-xs rounded-md text-center flex gap-2'
-                  onClick={() => handleDownload(doc.id, doc.url, doc.filename)}
-                >
-                  Gutyu! <FaDownload />
-                </button>
+                <div>
+                  <a
+                    href={doc.url}
+                    download={doc.filename}
+                    rel='noreferrer'
+                    target='_blank'
+                    className='bg-fuchsia-700 text-white p-1 text-xs rounded-md text-center flex gap-2'
+                    onClick={() =>
+                      handleDownload(doc.id, doc.url, doc.filename)
+                    }
+                  >
+                    Gutyu! <FaDownload />
+                  </a>
+                  <button
+                    className='bg-yellow-500 text-white p-1 text-xs rounded-md text-center flex gap-2'
+                    onClick={() => copyLink(doc.id, doc.url, doc.filename)}
+                  >
+                    Copy Link!
+                  </button>
+                </div>
               ),
             }))}
             loading={loading}
