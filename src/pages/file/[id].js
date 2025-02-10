@@ -107,7 +107,7 @@ const FilePage = () => {
           content={`Discover the amazing ${file.name} file! Click to download now and unlock its secrets.`}
         />
       </Head>
-      <div className='text-center mb-8'>
+      <div className='text-center mb-8 mt-20'>
         <h1 className='text-6xl font-bold text-fuchsia-600'>File Details</h1>
       </div>
       <div className='bg-white shadow-md rounded-lg p-6 max-w-lg mx-auto'>
