@@ -2,6 +2,7 @@
 import Head from 'next/head';
 import { NavBar } from './nav';
 import { Ban } from 'lucide-react';
+import { MobileBanner } from '../Banner';
 
 const Layout = ({
   title = 'NMTPlay - Download Free Files',
@@ -185,11 +186,17 @@ const Layout = ({
           onerror='_wrczv()'
           onload='_tfhtjfet()'
         ></script>
+        <script
+          async='async'
+          data-cfasync='false'
+          src='//pl25822745.effectiveratecpm.com/7c7c165b289bb869221a54a4b010a34c/invoke.js'
+        ></script>
       </Head>
 
       <NavBar />
 
       <main className='text-gray-700 bg-gray-900'>
+        <MobileBanner />
         <div>{children}</div>
         <section class='py-24 bg-gray-900'>
           <div class='max-w-7xl mx-auto px-5 sm:px-10 md:px-12 lg:px-5 '>
