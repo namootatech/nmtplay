@@ -170,6 +170,12 @@ const Layout = ({
         <link rel='manifest' href='/site.webmanifest' />
         {/* Favicon */}
         <link rel='icon' href='/favicon.ico' />
+        <script
+          src='https://kulroakonsu.net/88/tag.min.js'
+          data-zone='130758'
+          async
+          data-cfasync='false'
+        ></script>
       </Head>
 
       <NavBar />
