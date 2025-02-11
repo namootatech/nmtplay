@@ -52,12 +52,19 @@ const imigutyulo = [
     mfanekiso: <GiTeacher />,
   },
   {
-    igama: 'Movies & Videos',
-    ngawo:
-      'Bukela okanye ugutyule iimovies ezintsha kunye nezindala, ezalapha ekhaya okanye ezaphesheya apha.',
-    link: '/type/videos',
+    igama: 'Videos',
+    ngawo: 'Bukela okanye ugutyule iivideos.',
+    link: '/type/video',
     mfanekiso: <MdVideoLibrary />,
   },
+  {
+    igama: 'Movies',
+    ngawo:
+      'Bukela okanye ugutyule iimovies ezintsha kunye nezindala, ezalapha ekhaya okanye ezaphesheya apha.',
+    link: '/type/movies',
+    mfanekiso: <MdVideoLibrary />,
+  },
+
   {
     igama: 'Documents nee Forms',
     ngawo: 'Gutyula iiforms kunye nee document templates eziqhelekileyo apha.',
