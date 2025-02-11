@@ -55,7 +55,7 @@ const imigutyulo = [
     igama: 'Movies & Videos',
     ngawo:
       'Bukela okanye ugutyule iimovies ezintsha kunye nezindala, ezalapha ekhaya okanye ezaphesheya apha.',
-    link: '/videos',
+    link: '/type/videos',
     mfanekiso: <MdVideoLibrary />,
   },
   {

@@ -2,8 +2,6 @@
 import Head from 'next/head';
 import { NavBar } from './nav';
 import { Ban } from 'lucide-react';
-import Banner from '../Banner';
-import { ResponsiveAdUnit } from 'nextjs-google-adsense';
 
 const Layout = ({
   title = 'NMTPlay - Download Free Files',
@@ -176,12 +174,6 @@ const Layout = ({
 
       <NavBar />
 
-      <ResponsiveAdUnit
-        publisherId='pub-8294995671791919'
-        slotId='4300519302'
-        type='before-home-hero'
-      />
-
       <main className='text-gray-700 bg-gray-900'>
         <div>{children}</div>
         <section class='py-24 bg-gray-900'>
@@ -228,7 +220,6 @@ const Layout = ({
             </div>
           </div>
         </section>
-        <Banner />
         <footer class='bg-white rounded-lg shadow m-4 dark:bg-gray-800'>
           <div class='w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between'>
             <span class='text-sm text-gray-500 sm:text-center dark:text-gray-400'>
