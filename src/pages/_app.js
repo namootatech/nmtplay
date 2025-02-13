@@ -19,7 +19,7 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <meta name="example" content="your-popcash-validation-code-here" />
+        <meta name="ppck-ver" content="91377b8d6f3e95025cc9d9733176c7bb" />
       </Head>
       <AuthProvider>
         <PageLayout>
