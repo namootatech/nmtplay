@@ -5,6 +5,7 @@ import { AuthProvider } from '@/util/auth/context';
 import PortalLayout from '@/components/layout/portal';
 import Layout from '@/components/layout';
 // import Banner from '@/components/Banner';
+import { PropellerAd } from '@/components/propellerads/PropellerAds';
 
 export default function App({ Component, pageProps }) {
   const isPortalAuthRoute =
@@ -26,6 +27,7 @@ export default function App({ Component, pageProps }) {
       </Head>
       <AuthProvider>
         <PageLayout>
+          <PropellerAd />
           <Component {...pageProps} />  
         </PageLayout>
       </AuthProvider>
