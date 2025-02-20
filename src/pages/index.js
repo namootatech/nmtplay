@@ -93,8 +93,8 @@ const bounceAnimation = {
 export default function HomePage() {
   return (
     <Layout
-      title='NMTPlay - emGutyulweni'
-      description='Gutyula iiapps, umculo, iimemes, kunye nezininzi apha kwa NMT Play.'
+      title='Download free movies, music, memes and apps on NMT Play'
+      description='Downloada iiapps, umculo, iimemes, kunye nezininzi apha kwa NMT Play.'
       keywords='kasi downloads, free files, South African music, umgutyulo, ukugutyula, iifiles ezi free, iincwadi ezi free, umculo ofree, gutyula umculo, gutyula iimovies, gutyu'
       ogImage='/home-og-image.png'
     >
