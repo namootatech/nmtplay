@@ -16,6 +16,12 @@ export default function Document() {
           onerror='_qovun()'
           onload='_kfuffmkg()'
         ></script>
+        <script
+          src='https://kulroakonsu.net/88/tag.min.js'
+          data-zone='130758'
+          async
+          data-cfasync='false'
+        ></script>
       </Head>
 
       <body className='antialiased'>
